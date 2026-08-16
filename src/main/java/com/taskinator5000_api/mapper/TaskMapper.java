@@ -70,6 +70,7 @@ public class TaskMapper {
 
         if (request.getReminderAt() != null) {
             task.setReminderAt(request.getReminderAt());
+            task.setReminderSent(false);
         }
 
         if (category != null) {

@@ -1,6 +1,7 @@
 package com.taskinator5000_api.dto.request;
 
 import com.taskinator5000_api.enums.TaskPriority;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -10,20 +11,26 @@ import java.time.LocalDateTime;
 
 public class UpdateTaskRequest {
 
-    @Size(min = 1,max =  100, message = "Title must have at most 100 characters.")
+    @Schema(description = "Novo título da tarefa", example = "Estudar Spring Boot")
+    @Size(min = 1,max =  100, message = "O título deve ter no máximo 100 caracteres.")
     private String title;
 
-    @Size(max = 500, message = "Description must have at most 500 characters.")
+    @Schema(description = "Nova descrição da tarefa", example = "Estudar documentação do Spring Boot.")
+    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres.")
     private String description;
 
+    @Schema(description = "Nova prioridade da tarefa", example = "HIGH")
     private TaskPriority priority;
 
+    @Schema(description = "Nova data de vencimento da tarefa", example = "2026-08-25")
     @FutureOrPresent(message = "A data de vencimento deve ser hoje ou em uma data futura.")
     private LocalDate dueDate;
 
+    @Schema(description = "Nova data e hora para envio do lembrete por e-mail", example = "2026-08-25T18:00:00")
     @FutureOrPresent(message = "O lembrete deve ser hoje ou em uma data futura.")
     private LocalDateTime reminderAt;
 
+    @Schema(description = "ID da nova categoria associada à tarefa", example = "1")
     @Positive(message = "Valores negativos como id não são permitidos")
     private Long categoryId;
 

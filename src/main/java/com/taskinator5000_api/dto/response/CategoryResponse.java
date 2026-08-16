@@ -1,7 +1,11 @@
 package com.taskinator5000_api.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class CategoryResponse {
+    @Schema(description = "Identificador único da categoria", example = "1")
     private Long id;
+    @Schema(description = "Nome da categoria", example = "Estudos")
     private String name;
 
     public CategoryResponse(){

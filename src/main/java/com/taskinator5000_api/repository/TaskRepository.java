@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
@@ -36,4 +37,17 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
        WHERE t.id = :id
        """)
     Optional<Task> findByIdWithCategory(Long id);
+
+    @Query("""
+       SELECT t
+       FROM Task t
+       JOIN FETCH t.category
+       WHERE t.reminderAt <= :now
+       AND t.reminderSent = false
+       AND t.status <> :completedStatus
+       """)
+    List<Task> findTasksWithPendingReminders(
+            LocalDateTime now,
+            TaskStatus completedStatus
+    );
 }

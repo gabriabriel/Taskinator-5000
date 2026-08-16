@@ -43,6 +43,8 @@ public class Task {
 
     private LocalDateTime completedAt;
 
+    private boolean reminderSent;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
@@ -135,6 +137,14 @@ public class Task {
     public void setCompletedAt(LocalDateTime completedAt) {
         this.completedAt = completedAt;
     }
+
+    public void setCreatedAt(LocalDateTime createdAt) {this.createdAt = createdAt;}
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {this.updatedAt = updatedAt;}
+
+    public boolean isReminderSent() {return reminderSent;}
+
+    public void setReminderSent(boolean reminderSent) {this.reminderSent = reminderSent;}
 
     @Override
     public boolean equals(Object o) {
